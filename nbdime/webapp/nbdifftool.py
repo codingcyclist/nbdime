@@ -3,7 +3,7 @@
 
 
 
-
+import git
 import sys
 
 from ..args import (
@@ -42,7 +42,7 @@ def main_parsed(opts):
     """
     process_diff_flags(opts)
     base = opts.local
-    remote = opts.remote
+    remote = opts.remote or 'origin/' + git.Repo().active_branch.name
     return run_server(
         difftool_args=dict(base=base, remote=remote),
         on_port=lambda port: browse(
